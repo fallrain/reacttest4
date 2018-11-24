@@ -19,28 +19,33 @@ class Square extends Component {
 }
 
 class Board extends Component {
-  constructor(props) {
-    super(props);
+  constructor() {
+    super();
     this.state = {
-      squares: Array(9).fill(null)
+      squares: Array(9).fill(null),
+      xIsNext: true
     };
   }
 
   renderSquare(i) {
     return (
-      <Square value={this.state.squares[i]} onClick={this.handleClick}/>
+      <Square value={this.state.squares[i]} onClick={() => {
+        this.handleClick(i);
+      }}/>
     );
   }
 
   handleClick(i) {
-    alert()
-    //const squares = this.state.squares.slice();
-    this.state.squares[i] = 'X';
-    this.setState({squares: this.state.squares});
+    const squares = this.state.squares.slice();
+    squares[i] = this.state.xIsNext === 'X' ? 'O' : 'X';
+    this.setState({
+      squares: squares,
+      xIsNext: !this.state.xIsNext
+    });
   }
 
   render() {
-    const status = 'next palyer:X';
+    const status = 'next palyer:' + (this.state.xIsNext ? 'X' : 'O');
     return (
       <div>
         <div className={'status'}>
