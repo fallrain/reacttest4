@@ -25,11 +25,12 @@ class Board extends React.Component {
       let cell=new Array(3).fill('');
       let newCell=cell.map(()=>{
         if(num++<this.state.length){
+          let newNum=num;
           return(
             <Square
-              key={num}
-              value={this.props.squares[num]}
-              onClick={() => this.props.onClick(num)}
+              key={newNum}
+              value={this.props.squares[newNum]}
+              onClick={() => this.props.onClick(newNum)}
             />
           );
         }else{
@@ -59,7 +60,7 @@ class Game extends React.Component {
     super(props);
     this.state = {
       history: [{
-        squares: [0,1,2,3,4,5,6,7,8,9]
+        squares: Array(9).fill(null)
       }],
       stepNumber: 0,
       xIsNext: true
@@ -67,7 +68,8 @@ class Game extends React.Component {
   }
 
   handleClick(i) {
-    const history = this.state.history;
+    const history = this.state.history.slice(0, this.state.stepNumber + 1);
+    //const history = this.state.history;
     const current = history[history.length - 1];
     const squares = current.squares.slice();
     if (calculateWinner(squares) || squares[i]) {
