@@ -19,21 +19,21 @@ class Board extends React.Component {
   }
 
   renderSquare() {
-    let num=0;
-    let row=new Array(~~this.state.length/3).fill('');
-    let newRow=row.map((v,i)=>{
-      let cell=new Array(3).fill('');
-      let newCell=cell.map(()=>{
-        if(num++<this.state.length){
-          let newNum=num;
-          return(
+    let num = 0;
+    let row = new Array(~~this.state.length / 3).fill('');
+    let newRow = row.map((v, i) => {
+      let cell = new Array(3).fill('');
+      let newCell = cell.map(() => {
+        if (num++ < this.state.length) {
+          let newNum = num;
+          return (
             <Square
               key={newNum}
               value={this.props.squares[newNum]}
               onClick={() => this.props.onClick(newNum)}
             />
           );
-        }else{
+        } else {
           return '';
         }
       });
@@ -157,3 +157,9 @@ function calculateWinner(squares) {
   return null;
 }
 
+function a(num) {
+  for (var i = (num - 1) / 2; i > -1; i--) {
+    console.log(new Array[i].fill(' ').join());
+    console.log(new Array(i).fill('*').join());
+  }
+}
